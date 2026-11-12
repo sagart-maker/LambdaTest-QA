@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LambdaTest QA Agent prototype</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap">
+<style>
+body{margin:0;background:#F7F6F2}
+a{color:#2B6CB0}a:hover{color:#1C4E85}
+input,textarea{font:inherit}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2B6CB0;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F7F6F2; color: #14213D; font-family: Inter, Arial, sans-serif; font-size: 16px">
+
+<header style="background: #14213D; color: #F7F6F2; padding: 16px 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+<div>
+<div style="font-family: 'Space Grotesk', Arial, sans-serif; font-size: 20px; font-weight: 700">LambdaTest QA Agent</div>
+<div style="font-size: 13px; color: #C9D3E3">Prototype · sample data only</div>
+</div>
+</div>
+<div style="font-size: 14px; color: #C9D3E3">Site under test: <b style="color: #F7F6F2">{{url}}</b></div>
+</div>
+</header>
+
+<nav aria-label="Progress" style="background: #FFFFFF; border-bottom: 1px solid #DDE2EA; padding: 16px 24px">
+<ol style="max-width: 1200px; margin: 0 auto; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<sc-for list="{{steps}}" as="step" hint-placeholder-count="4">
+<li style="display: flex; align-items: center; gap: 10px">
+<span style="{{step.dotStyle}}">{{step.num}}</span>
+<span style="{{step.labelStyle}}">{{step.label}}</span>
+</li>
+</sc-for>
+</ol>
+</nav>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; box-sizing: border-box">
+
+<sc-if value="{{isBrief}}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="h-brief" style="display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 id="h-brief" style="margin: 0 0 8px; font-family: 'Space Grotesk', Arial, sans-serif; font-size: 32px">1. Give the brief</h1>
+<p style="margin: 0; color: #4A5568">Tell the agent what to test. It will write test cases and a plan for your approval.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px">
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px">Website &amp; requirements</h2>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Website URL
+<input type="url" value="{{url}}" onChange="{{setUrl}}" style="padding: 12px; border: 1px solid #8A94A6; border-radius: 8px; font-weight: 400">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Requirements doc (BRD / PRD)
+<input type="text" placeholder="Link or file name, e.g. checkout-BRD.pdf" style="padding: 12px; border: 1px solid #8A94A6; border-radius: 8px; font-weight: 400">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Pages and flows to test
+<textarea rows="3" style="padding: 12px; border: 1px solid #8A94A6; border-radius: 8px; font-weight: 400; resize: vertical">Home, Product page, Cart, Checkout, Contact form</textarea>
+</label>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px">LambdaTest account</h2>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Username
+<input type="text" placeholder="LT_USERNAME" style="padding: 12px; border: 1px solid #8A94A6; border-radius: 8px; font-weight: 400">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Access key
+<input type="password" placeholder="LT_ACCESS_KEY" style="padding: 12px; border: 1px solid #8A94A6; border-radius: 8px; font-weight: 400">
+</label>
+<p style="margin: 0; font-size: 13px; color: #4A5568">Kept in a local .env file. Never written into reports.</p>
+</div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 18px">Test types <span style="font-weight: 400; color: #4A5568; font-size: 14px">({{typeCount}} selected)</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{types}}" as="t" hint-placeholder-count="10">
+<button type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.mark}} {{t.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 18px">Devices <span style="font-weight: 400; color: #4A5568; font-size: 14px">(default: latest iPhone and Android)</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{devices}}" as="d" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="{{d.style}}">{{d.mark}} {{d.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px">
+<button type="button" onClick="{{goPlan}}" style="background: #14213D; color: #F7F6F2; border: none; border-radius: 8px; padding: 14px 24px; font-weight: 700; min-height: 48px">Generate test plan →</button>
+<sc-if value="{{briefError}}" hint-placeholder-val="{{ false }}">
+<p role="alert" style="margin: 0; color: #B42318; font-weight: 600">Pick at least one test type and one device.</p>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isPlan}}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="h-plan" style="display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 id="h-plan" style="margin: 0 0 8px; font-family: 'Space Grotesk', Arial, sans-serif; font-size: 32px">2. Review and approve the plan</h1>
+<p style="margin: 0; color: #4A5568">The AI wrote these test cases. Nothing runs on LambdaTest until you approve.</p>
+</div>
+
+<sc-if value="{{planRevised}}" hint-placeholder-val="{{ false }}">
+<p role="status" style="margin: 0; background: #E6F0FA; color: #1C4E85; padding: 12px 16px; border-radius: 8px; font-weight: 600">Plan updated with your feedback (version {{planVersion}}).</p>
+</sc-if>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px">
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif">{{caseCount}}</div><div style="color: #4A5568">Test cases</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif">{{typeCount}}</div><div style="color: #4A5568">Test types</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif">{{deviceCount}}</div><div style="color: #4A5568">Devices</div></div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; overflow-x: auto">
+<table style="width: 100%; border-collapse: collapse; min-width: 640px">
+<thead>
+<tr style="background: #EEF1F6; text-align: left">
+<th style="padding: 12px 16px; font-size: 14px">ID</th>
+<th style="padding: 12px 16px; font-size: 14px">Test case</th>
+<th style="padding: 12px 16px; font-size: 14px">Type</th>
+<th style="padding: 12px 16px; font-size: 14px">Priority</th>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{cases}}" as="c" hint-placeholder-count="8">
+<tr style="border-top: 1px solid #DDE2EA">
+<td style="padding: 12px 16px; font-family: monospace; font-size: 14px">{{c.id}}</td>
+<td style="padding: 12px 16px">{{c.title}}</td>
+<td style="padding: 12px 16px; color: #4A5568">{{c.type}}</td>
+<td style="padding: 12px 16px; font-weight: 600">{{c.priority}}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<p style="margin: 0; font-size: 14px; color: #4A5568">Each case runs on: {{deviceList}}</p>
+
+<sc-if value="{{showChanges}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">What should change?
+<textarea rows="3" placeholder="e.g. Add a test for coupon codes at checkout" style="padding: 12px; border: 1px solid #8A94A6; border-radius: 8px; font-weight: 400"></textarea>
+</label>
+<div><button type="button" onClick="{{sendChanges}}" style="background: #FFFFFF; color: #14213D; border: 2px solid #14213D; border-radius: 8px; padding: 10px 20px; font-weight: 700; min-height: 44px">Send to AI</button></div>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button type="button" onClick="{{backToBrief}}" style="background: transparent; color: #14213D; border: 1px solid #8A94A6; border-radius: 8px; padding: 14px 20px; min-height: 48px">← Edit brief</button>
+<button type="button" onClick="{{toggleChanges}}" style="background: #FFFFFF; color: #B5541B; border: 2px solid #B5541B; border-radius: 8px; padding: 14px 20px; font-weight: 700; min-height: 48px">Request changes</button>
+<button type="button" onClick="{{approve}}" style="background: #14213D; color: #F7F6F2; border: none; border-radius: 8px; padding: 14px 24px; font-weight: 700; min-height: 48px">Approve &amp; run on LambdaTest →</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isRun}}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="h-run" style="display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 id="h-run" style="margin: 0 0 8px; font-family: 'Space Grotesk', Arial, sans-serif; font-size: 32px">3. Running on LambdaTest</h1>
+<p style="margin: 0; color: #4A5568">{{caseCount}} test cases on {{deviceCount}} real devices and browsers. Smoke runs first as a gate.</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; font-weight: 600"><span>Overall progress</span><span>{{progress}}%</span></div>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{progress}}" aria-label="Test run progress" style="height: 12px; background: #EEF1F6; border-radius: 999px; overflow: hidden">
+<div style="{{barStyle}}"></div>
+</div>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px">
+<sc-for list="{{runRows}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 16px 24px; border-bottom: 1px solid #EEF1F6">
+<span style="font-weight: 600">{{r.label}}</span>
+<span style="{{r.style}}">{{r.status}}</span>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{runDone}}" hint-placeholder-val="{{ false }}">
+<div><button type="button" onClick="{{goReport}}" style="background: #14213D; color: #F7F6F2; border: none; border-radius: 8px; padding: 14px 24px; font-weight: 700; min-height: 48px">View test report →</button></div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{isReport}}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="h-report" style="display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 id="h-report" style="margin: 0 0 8px; font-family: 'Space Grotesk', Arial, sans-serif; font-size: 32px">4. Test report</h1>
+<p style="margin: 0; color: #4A5568">Sample results for {{url}}. Try removing “Responsive” in the brief to see a Go.</p>
+</div>
+
+<div style="{{verdictStyle}}">
+<div style="font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase">Release decision</div>
+<div style="font-family: 'Space Grotesk', Arial, sans-serif; font-size: 44px; font-weight: 700">{{verdict}}</div>
+<div style="font-size: 16px">{{verdictReason}}</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px">
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif">{{totalRuns}}</div><div style="color: #4A5568">Test runs</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif; color: #1F7A4D">{{passedRuns}}</div><div style="color: #4A5568">Passed</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif; color: #B42318">{{failedRuns}}</div><div style="color: #4A5568">Failed</div></div>
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; padding: 20px"><div style="font-size: 32px; font-weight: 700; font-family: 'Space Grotesk', Arial, sans-serif">{{defectCount}}</div><div style="color: #4A5568">Bugs found</div></div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px; overflow-x: auto">
+<h2 style="margin: 0; padding: 16px 20px; font-size: 18px; border-bottom: 1px solid #DDE2EA">Results by test type</h2>
+<table style="width: 100%; border-collapse: collapse">
+<thead><tr style="background: #EEF1F6; text-align: left"><th style="padding: 10px 20px; font-size: 14px">Type</th><th style="padding: 10px 20px; font-size: 14px">Passed</th><th style="padding: 10px 20px; font-size: 14px">Failed</th><th style="padding: 10px 20px; font-size: 14px">Status</th></tr></thead>
+<tbody>
+<sc-for list="{{matrix}}" as="m" hint-placeholder-count="4">
+<tr style="border-top: 1px solid #EEF1F6"><td style="padding: 10px 20px">{{m.type}}</td><td style="padding: 10px 20px">{{m.passed}}</td><td style="padding: 10px 20px">{{m.failed}}</td><td style="{{m.style}}">{{m.status}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #DDE2EA; border-radius: 12px">
+<h2 style="margin: 0; padding: 16px 20px; font-size: 18px; border-bottom: 1px solid #DDE2EA">Bugs, most severe first</h2>
+<sc-if value="{{noDefects}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 20px; color: #1F7A4D; font-weight: 600">No bugs found in the selected test types.</p>
+</sc-if>
+<sc-for list="{{defects}}" as="b" hint-placeholder-count="3">
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF1F6; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-family: monospace; font-size: 14px">{{b.id}}</span>
+<span style="{{b.sevStyle}}">{{b.severity}}</span>
+<span style="font-size: 13px; color: #4A5568">{{b.type}} · {{b.device}}</span>
+</div>
+<div style="font-weight: 600">{{b.title}}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button type="button" onClick="{{restart}}" style="background: #14213D; color: #F7F6F2; border: none; border-radius: 8px; padding: 14px 24px; font-weight: 700; min-height: 48px">Start a new run</button>
+<button type="button" onClick="{{backToBrief}}" style="background: transparent; color: #14213D; border: 1px solid #8A94A6; border-radius: 8px; padding: 14px 20px; min-height: 48px">Change brief and re-run</button>
+</div>
+</section>
+</sc-if>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1100}}'>
+var TYPES = [
+  { key: 'smoke', label: 'Smoke', cases: ['Home page loads without errors', 'Main menu links open the right pages'] },
+  { key: 'sanity', label: 'Sanity', cases: ['Latest fix works as described', 'Features next to the fix still work'] },
+  { key: 'functional', label: 'Functional', cases: ['Contact form submits with valid data', 'Form rejects an invalid email'] },
+  { key: 'ui', label: 'UI vs design', cases: ['Header matches Figma spacing and fonts', 'Buttons match design colours and states'] },
+  { key: 'regression', label: 'Regression', cases: ['Saved suite passes against last run', 'No visual change vs SmartUI baseline'] },
+  { key: 'responsive', label: 'Responsive', cases: ['Layout fits at phone width', 'Checkout works in landscape'] },
+  { key: 'a11y', label: 'Accessibility', cases: ['Pages pass WCAG 2.2 AA scan', 'Keyboard reaches every control'] },
+  { key: 'perf', label: 'Performance', cases: ['LCP under 2.5 s on mobile', 'Layout shift (CLS) under 0.1'] },
+  { key: 'seo', label: 'SEO', cases: ['Every page has a title and meta description', 'No broken links'] },
+  { key: 'unit', label: 'Unit', cases: ['Unit tests pass with coverage report', 'Missing unit tests are added'] }
+];
+var DEVICES = ['iPhone 16 · iOS 18', 'Galaxy S24 · Android 14', 'Chrome · Windows 11', 'Safari · macOS', 'Edge · Windows 11'];
+var BUGS = [
+  { id: 'BUG-01', severity: 'Critical', type: 'Responsive', key: 'responsive', device: 'iPhone 16 · iOS 18', title: 'Checkout button hidden in landscape view' },
+  { id: 'BUG-02', severity: 'Major', type: 'Functional', key: 'functional', device: 'All devices', title: 'Contact form accepts an invalid email' },
+  { id: 'BUG-03', severity: 'Major', type: 'Accessibility', key: 'a11y', device: 'All devices', title: 'Form errors not announced to screen readers' },
+  { id: 'BUG-04', severity: 'Minor', type: 'SEO', key: 'seo', device: 'n/a', title: 'Missing meta description on /pricing' }
+];
+var SEV = {
+  Critical: 'background:#B42318;color:#FFFFFF;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700',
+  Major: 'background:#F2A65A;color:#14213D;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700',
+  Minor: 'background:#EEF1F6;color:#14213D;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700'
+};
+var CHIP_ON = 'background:#14213D;color:#F7F6F2;border:1px solid #14213D;border-radius:999px;padding:10px 16px;min-height:44px;font-weight:600';
+var CHIP_OFF = 'background:#FFFFFF;color:#14213D;border:1px solid #8A94A6;border-radius:999px;padding:10px 16px;min-height:44px';
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      screen: 'brief',
+      url: 'https://example.com',
+      types: { smoke: true, functional: true, responsive: true, a11y: true },
+      devices: { 0: true, 1: true },
+      progress: 0,
+      briefError: false,
+      showChanges: false,
+      planVersion: 1
+    };
+  }
+  componentWillUnmount() { if (this.timer) clearInterval(this.timer); }
+  selTypes() { var s = this.state.types; return TYPES.filter(function (t) { return s[t.key]; }); }
+  selDevices() { var s = this.state.devices; return DEVICES.filter(function (d, i) { return s[i]; }); }
+  startRun() {
+    var self = this;
+    if (this.timer) clearInterval(this.timer);
+    this.setState({ screen: 'run', progress: 0, showChanges: false });
+    this.timer = setInterval(function () {
+      var p = Math.min(100, self.state.progress + 4);
+      self.setState({ progress: p });
+      if (p >= 100) { clearInterval(self.timer); self.timer = null; }
+    }, 120);
+  }
+  renderVals() {
+    var self = this, st = this.state;
+    var order = ['brief', 'plan', 'run', 'report'];
+    var cur = order.indexOf(st.screen);
+    var stepLabels = ['Brief', 'Plan & approve', 'Run on LambdaTest', 'Report'];
+    var steps = stepLabels.map(function (label, i) {
+      var done = i < cur, active = i === cur;
+      return {
+        num: done ? '✓' : String(i + 1),
+        label: label,
+        dotStyle: 'display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;font-size:14px;font-weight:700;' + (active ? 'background:#14213D;color:#F7F6F2' : done ? 'background:#1F7A4D;color:#FFFFFF' : 'background:#EEF1F6;color:#4A5568'),
+        labelStyle: 'font-size:15px;' + (active ? 'font-weight:700;color:#14213D' : 'color:#4A5568')
+      };
+    });
+    var types = TYPES.map(function (t) {
+      var on = !!st.types[t.key];
+      return {
+        label: t.label, mark: on ? '✓' : '+', pressed: on ? 'true' : 'false', style: on ? CHIP_ON : CHIP_OFF,
+        pick: function () { var n = Object.assign({}, self.state.types); n[t.key] = !n[t.key]; self.setState({ types: n, briefError: false }); }
+      };
+    });
+    var devices = DEVICES.map(function (d, i) {
+      var on = !!st.devices[i];
+      return {
+        label: d, mark: on ? '✓' : '+', pressed: on ? 'true' : 'false', style: on ? CHIP_ON : CHIP_OFF,
+        pick: function () { var n = Object.assign({}, self.state.devices); n[i] = !n[i]; self.setState({ devices: n, briefError: false }); }
+      };
+    });
+    var sel = this.selTypes(), devs = this.selDevices();
+    var cases = [], n = 1;
+    sel.forEach(function (t) {
+      t.cases.forEach(function (c, j) {
+        cases.push({ id: 'TC-' + String(n++).padStart(3, '0'), title: c, type: t.label, priority: j === 0 ? 'P1' : 'P2' });
+      });
+    });
+    if (st.planVersion > 1 && sel.length) cases.push({ id: 'TC-' + String(n++).padStart(3, '0'), title: 'Extra case added from your feedback', type: sel[0].label, priority: 'P2' });
+
+    var runRows = devs.map(function (d, i) {
+      var start = (i * 100) / devs.length, end = ((i + 1) * 100) / devs.length;
+      var status = st.progress >= end ? 'Done' : st.progress > start ? 'Running…' : 'Queued';
+      var color = status === 'Done' ? 'color:#1F7A4D' : status === 'Queued' ? 'color:#4A5568' : 'color:#1C4E85';
+      return { label: d, status: status, style: 'font-weight:700;' + color };
+    });
+
+    var keys = {}; sel.forEach(function (t) { keys[t.key] = true; });
+    var bugs = BUGS.filter(function (b) { return keys[b.key]; }).map(function (b) { return Object.assign({}, b, { sevStyle: SEV[b.severity] }); });
+    var critical = bugs.some(function (b) { return b.severity === 'Critical'; });
+    var matrix = sel.map(function (t) {
+      var total = t.cases.length * devs.length;
+      var failed = bugs.filter(function (b) { return b.key === t.key; }).length;
+      return {
+        type: t.label, passed: total - failed, failed: failed,
+        status: failed ? 'Fail' : 'Pass',
+        style: 'padding:10px 20px;font-weight:700;' + (failed ? 'color:#B42318' : 'color:#1F7A4D')
+      };
+    });
+    var totalRuns = cases.length * devs.length;
+    var failedRuns = bugs.length;
+
+    return {
+      url: st.url,
+      steps: steps, types: types, devices: devices,
+      typeCount: sel.length, deviceCount: devs.length, deviceList: devs.join(', ') || 'none',
+      isBrief: st.screen === 'brief', isPlan: st.screen === 'plan', isRun: st.screen === 'run', isReport: st.screen === 'report',
+      briefError: st.briefError,
+      cases: cases, caseCount: cases.length,
+      showChanges: st.showChanges, planRevised: st.planVersion > 1, planVersion: st.planVersion,
+      progress: st.progress, runDone: st.progress >= 100, runRows: runRows,
+      barStyle: 'height:100%;background:#2B6CB0;border-radius:999px;width:' + st.progress + '%',
+      verdict: critical ? 'No-Go' : 'Go',
+      verdictReason: critical ? 'A critical bug blocks release. Fix BUG-01, then re-run regression.' : (bugs.length ? 'No critical bugs. Fix the remaining issues in the next sprint.' : 'All selected tests passed.'),
+      verdictStyle: 'border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:4px;' + (critical ? 'background:#FDECEA;color:#7A1A12;border:2px solid #B42318' : 'background:#E7F4EC;color:#14532D;border:2px solid #1F7A4D'),
+      totalRuns: totalRuns, passedRuns: totalRuns - failedRuns, failedRuns: failedRuns,
+      defects: bugs, defectCount: bugs.length, noDefects: bugs.length === 0,
+      matrix: matrix,
+      setUrl: function (e) { self.setState({ url: e.target.value }); },
+      goPlan: function () {
+        if (!self.selTypes().length || !self.selDevices().length) { self.setState({ briefError: true }); return; }
+        self.setState({ screen: 'plan', briefError: false });
+      },
+      backToBrief: function () { if (self.timer) clearInterval(self.timer); self.setState({ screen: 'brief', showChanges: false }); },
+      toggleChanges: function () { self.setState({ showChanges: !self.state.showChanges }); },
+      sendChanges: function () { self.setState({ showChanges: false, planVersion: self.state.planVersion + 1 }); },
+      approve: function () { self.startRun(); },
+      goReport: function () { self.setState({ screen: 'report' }); },
+      restart: function () { if (self.timer) clearInterval(self.timer); self.setState({ screen: 'brief', progress: 0, planVersion: 1, showChanges: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
