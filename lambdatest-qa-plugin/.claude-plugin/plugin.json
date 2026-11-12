@@ -1,0 +1,6 @@
+{
+  "name": "lambdatest-qa",
+  "version": "1.0.0",
+  "description": "Website QA on LambdaTest / TestMu AI: guided intake (BRD, Figma/design images, test types, devices, pages, credentials), a QA agent that writes test cases, runs unit, smoke, sanity, functional, UI, regression, responsive, accessibility, performance and SEO tests on real devices, and delivers the test report as Excel, PDF or Word.",
+  "keywords": ["qa", "testing", "lambdatest", "testmu", "accessibility", "performance", "seo", "ui-testing", "figma"]
+}
