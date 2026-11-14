@@ -1,0 +1,228 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1215" viewBox="0 0 1440 1215">
+<title>03 New test run — Desktop</title>
+<rect x="0" y="0" width="1440" height="1215" rx="0" fill="#f5f6f8"/>
+<g id="Top bar">
+<rect x="0" y="0" width="1440" height="56" rx="0" fill="#ffffff"/>
+<line x1="0" y1="56" x2="1440" y2="56" stroke="#dde2ea" stroke-width="1"/>
+<rect x="20" y="17" width="30" height="22" rx="6" fill="#14213d"/>
+<text x="35" y="32.5" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">QA</text>
+<text x="58" y="33" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">LambdaTest QA Agent</text>
+<g id="Pill / ok / Claude Code 2.4">
+<rect x="880.68" y="17" width="125" height="22" rx="11" fill="#e5f4ea"/>
+<text x="890.68" y="32.5" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#1f7a3a">Claude Code 2.4</text>
+</g>
+<g id="Pill / ok / QA agent plugin">
+<rect x="1013.68" y="17" width="125" height="22" rx="11" fill="#e5f4ea"/>
+<text x="1023.68" y="32.5" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#1f7a3a">QA agent plugin</text>
+</g>
+<g id="Pill / ok / LambdaTest keys (~/.lambdatest/.env)">
+<rect x="1146.6799999999998" y="17" width="273" height="22" rx="11" fill="#e5f4ea"/>
+<text x="1156.6799999999998" y="32.5" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#1f7a3a">LambdaTest keys (~/.lambdatest/.env)</text>
+</g>
+</g>
+<g id="Card / New test run">
+<rect x="96" y="76" width="739" height="1099" rx="10" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="114" y="116" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="700" fill="#1d2433">New test run</text>
+<text x="114" y="143" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#5b6475">Enter a website. The agent writes test cases and a test plan, waits for your approval,</text>
+<text x="114" y="165.5" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#5b6475">runs the tests on LambdaTest real devices and writes the report.</text>
+<g id="Fieldset / 1. Website">
+<rect x="114" y="189" width="703" height="316" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<rect x="124" y="179" width="99" height="20" rx="0" fill="#ffffff"/>
+<text x="130" y="194" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">1. Website</text>
+<g id="Field / Website URL">
+<text x="128" y="219" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Website URL</text>
+<rect x="128" y="227" width="675" height="38" rx="6" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="138" y="251" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">https://staging.example.com</text>
+</g>
+<g id="Field / Environment">
+<text x="128" y="289" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Environment</text>
+<rect x="128" y="297" width="331.5" height="38" rx="6" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="138" y="321" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Staging / UAT</text>
+<path d="M437.5 313 l5 5 l5 -5" fill="none" stroke="#5b6475" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Field / Pages">
+<text x="471.5" y="289" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Pages</text>
+<rect x="471.5" y="297" width="331.5" height="38" rx="6" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="481.5" y="321" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Crawl from the homepage</text>
+<path d="M781 313 l5 5 l5 -5" fill="none" stroke="#5b6475" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Field / Critical (P0) flows">
+<text x="128" y="359" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Critical (P0) flows</text>
+<rect x="128" y="367" width="675" height="38" rx="6" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="138" y="391" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#5b6475">Home → Search → Product → Cart → Checkout</text>
+</g>
+<g id="Field / Requirements doc (optional)">
+<text x="128" y="429" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Requirements doc (optional)</text>
+<rect x="128" y="437" width="675" height="58" rx="6" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="138" y="461" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#5b6475">Paste acceptance criteria, or a file path / link to the BRD/PRD</text>
+</g>
+</g>
+<g id="Fieldset / 2. Test types">
+<rect x="114" y="523" width="703" height="154" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<rect x="124" y="513" width="125.1" height="20" rx="0" fill="#ffffff"/>
+<text x="130" y="528" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">2. Test types</text>
+<g id="Checkbox / Smoke">
+<rect x="128" y="543" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M132 551.5 L135 554.5 L140 548" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="152" y="556" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Smoke</text>
+</g>
+<g id="Checkbox / Functional">
+<rect x="208.5" y="543" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M212.5 551.5 L215.5 554.5 L220.5 548" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="232.5" y="556" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Functional</text>
+</g>
+<g id="Checkbox / UI (design vs live)">
+<rect x="329.5" y="543" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M333.5 551.5 L336.5 554.5 L341.5 548" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="353.5" y="556" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">UI (design vs live)</text>
+</g>
+<g id="Checkbox / Responsive / cross-browser">
+<rect x="523.4" y="543" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M527.4 551.5 L530.4 554.5 L535.4 548" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="547.4" y="556" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Responsive / cross-browser</text>
+</g>
+<g id="Checkbox / Accessibility">
+<rect x="128" y="573" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M132 581.5 L135 584.5 L140 578" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="152" y="586" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Accessibility</text>
+</g>
+<g id="Checkbox / SEO">
+<rect x="273.3" y="573" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M277.3 581.5 L280.3 584.5 L285.3 578" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="297.3" y="586" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">SEO</text>
+</g>
+<g id="Checkbox / Performance">
+<rect x="337.6" y="573" width="16" height="16" rx="3" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="361.6" y="586" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Performance</text>
+</g>
+<g id="Checkbox / Sanity">
+<rect x="466.70000000000005" y="573" width="16" height="16" rx="3" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="490.70000000000005" y="586" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Sanity</text>
+</g>
+<g id="Checkbox / Regression">
+<rect x="555.3000000000001" y="573" width="16" height="16" rx="3" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="579.3000000000001" y="586" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Regression</text>
+</g>
+<g id="Field / Design reference for UI testing (optional)">
+<text x="128" y="621" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Design reference for UI testing (optional)</text>
+<rect x="128" y="629" width="675" height="38" rx="6" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="138" y="653" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#5b6475">Figma link or folder of PNG mockups</text>
+</g>
+</g>
+<g id="Fieldset / 3. Devices">
+<rect x="114" y="695" width="703" height="216" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<rect x="124" y="685" width="99" height="20" rx="0" fill="#ffffff"/>
+<text x="130" y="700" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">3. Devices</text>
+<g id="Device tier / Core phones / selected">
+<rect x="128" y="713" width="219.66666666666666" height="72" rx="8" fill="#fff3e0" stroke="#f2a65a" stroke-width="1"/>
+<circle cx="146" cy="733" r="7.5" fill="#ffffff" stroke="#14213d" stroke-width="1"/>
+<circle cx="146" cy="733" r="4" fill="#14213d"/>
+<text x="162" y="738" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">Core phones</text>
+<text x="138" y="767" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Latest iPhone, Galaxy S, Pixel</text>
+</g>
+<g id="Device tier / Broad mobile">
+<rect x="355.66666666666663" y="713" width="219.66666666666666" height="72" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<circle cx="373.66666666666663" cy="733" r="7.5" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="389.66666666666663" y="738" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">Broad mobile</text>
+<text x="365.66666666666663" y="767" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">~20 real phones &amp; tablets</text>
+</g>
+<g id="Device tier / Phones + desktop">
+<rect x="583.3333333333333" y="713" width="219.66666666666666" height="72" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<circle cx="601.3333333333333" cy="733" r="7.5" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="617.3333333333333" y="738" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">Phones + desktop</text>
+<text x="593.3333333333333" y="767" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Adds Chrome, Edge, Safari</text>
+</g>
+<g id="Device tier / Phones + desktop + iPad">
+<rect x="128" y="793" width="219.66666666666666" height="72" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<circle cx="146" cy="813" r="7.5" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="162" y="818" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">Phones + desktop + iPad</text>
+<text x="138" y="847" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Adds the latest iPad</text>
+</g>
+<g id="Device tier / Custom list">
+<rect x="355.66666666666663" y="793" width="219.66666666666666" height="72" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<circle cx="373.66666666666663" cy="813" r="7.5" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="389.66666666666663" y="818" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">Custom list</text>
+<text x="365.66666666666663" y="847" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Name the devices yourself</text>
+</g>
+<g id="Checkbox / Real devices only (no emulators)">
+<rect x="128" y="881" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M132 889.5 L135 892.5 L140 886" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="152" y="894" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Real devices only (no emulators)</text>
+</g>
+</g>
+<g id="Details / 4. More options (collapsed)">
+<rect x="114" y="929" width="703" height="44" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<path d="M130 945 l6 6 l-6 6" fill="#1d2433"/>
+<text x="144" y="956" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">4. More options</text>
+</g>
+<g id="Fieldset / 5. Report formats">
+<rect x="114" y="987" width="703" height="76" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<rect x="124" y="977" width="159.89999999999998" height="20" rx="0" fill="#ffffff"/>
+<text x="130" y="992" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d2433">5. Report formats</text>
+<g id="Checkbox / Excel">
+<rect x="128" y="1007" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M132 1015.5 L135 1018.5 L140 1012" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="152" y="1020" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Excel</text>
+</g>
+<g id="Checkbox / PDF">
+<rect x="212.5" y="1007" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M216.5 1015.5 L219.5 1018.5 L224.5 1012" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="236.5" y="1020" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">PDF</text>
+</g>
+<g id="Checkbox / Word">
+<rect x="280.8" y="1007" width="16" height="16" rx="3" fill="#ffffff" stroke="#5b6475" stroke-width="1"/>
+<text x="304.8" y="1020" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Word</text>
+</g>
+<text x="128" y="1049" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">report.md is always written.</text>
+</g>
+<g id="Checkbox / I own this site or am authorized to test it.">
+<rect x="114" y="1085" width="16" height="16" rx="3" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<path d="M118 1093.5 L121 1096.5 L126 1090" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="138" y="1098" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">I own this site or am authorized to test it.</text>
+</g>
+<g id="Button / primary / Create test plan">
+<rect x="114" y="1117" width="171" height="40" rx="6" fill="#14213d" stroke="#14213d" stroke-width="1"/>
+<text x="199.5" y="1142" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">Create test plan</text>
+</g>
+</g>
+<g id="Card / Runs">
+<rect x="851" y="76" width="493" height="356" rx="10" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="869" y="110" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="16" font-weight="700" fill="#1d2433">Runs</text>
+<g id="Run row / https://staging.example.com">
+<rect x="869" y="126" width="457" height="64" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="879" y="150" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d2433">https://staging.example.com</text>
+<text x="879" y="175" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">14 Nov 2026, 10:42 · </text>
+<g id="Badge / wait / Awaiting approval">
+<rect x="1026.42" y="158" width="152" height="26" rx="13" fill="#fff3e0"/>
+<text x="1038.42" y="176" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#9a4614">Awaiting approval</text>
+</g>
+</g>
+<g id="Run row / https://shop-uat.example.com">
+<rect x="869" y="198" width="457" height="64" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="879" y="222" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d2433">https://shop-uat.example.com</text>
+<text x="879" y="247" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">13 Nov 2026, 16:05 · </text>
+<g id="Badge / ok / Complete">
+<rect x="1026.42" y="230" width="84" height="26" rx="13" fill="#e5f4ea"/>
+<text x="1038.42" y="248" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1f7a3a">Complete</text>
+</g>
+</g>
+<g id="Run row / https://blog-staging.example.com">
+<rect x="869" y="270" width="457" height="64" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="879" y="294" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d2433">https://blog-staging.example.com</text>
+<text x="879" y="319" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">13 Nov 2026, 11:20 · </text>
+<g id="Badge / wait / Running tests…">
+<rect x="1026.42" y="302" width="130" height="26" rx="13" fill="#fff3e0"/>
+<text x="1038.42" y="320" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#9a4614">Running tests…</text>
+</g>
+</g>
+<g id="Run row / https://localhost:3000">
+<rect x="869" y="342" width="457" height="64" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="879" y="366" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="600" fill="#1d2433">https://localhost:3000</text>
+<text x="879" y="391" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">12 Nov 2026, 09:14 · </text>
+<g id="Badge / bad / Planning failed">
+<rect x="1026.42" y="374" width="137" height="26" rx="13" fill="#fde8e6"/>
+<text x="1038.42" y="392" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#b42318">Planning failed</text>
+</g>
+</g>
+</g>
+</svg>

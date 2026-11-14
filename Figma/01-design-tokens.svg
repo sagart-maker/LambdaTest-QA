@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1120" viewBox="0 0 1440 1120">
+<title>01 Design tokens</title>
+<rect x="0" y="0" width="1440" height="1120" rx="0" fill="#ffffff"/>
+<text x="64" y="80" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="32" font-weight="700" fill="#1d2433">LambdaTest QA Agent — Design tokens</text>
+<text x="64" y="112" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="16" font-weight="400" fill="#5b6475">From web-app/public/styles.css. Light and dark themes share token names.</text>
+<text x="64" y="170" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="20" font-weight="700" fill="#1d2433">Colour — Light</text>
+<g id="Colour / Light / bg">
+<rect x="64" y="196" width="142" height="70" rx="8" fill="#f5f6f8" stroke="#dde2ea" stroke-width="1"/>
+<text x="64" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--bg</text>
+<text x="64" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#F5F6F8</text>
+</g>
+<g id="Colour / Light / card">
+<rect x="222" y="196" width="142" height="70" rx="8" fill="#ffffff" stroke="#dde2ea" stroke-width="1"/>
+<text x="222" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--card</text>
+<text x="222" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#FFFFFF</text>
+</g>
+<g id="Colour / Light / text">
+<rect x="380" y="196" width="142" height="70" rx="8" fill="#1d2433" stroke="#dde2ea" stroke-width="1"/>
+<text x="380" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--text</text>
+<text x="380" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#1D2433</text>
+</g>
+<g id="Colour / Light / muted">
+<rect x="538" y="196" width="142" height="70" rx="8" fill="#5b6475" stroke="#dde2ea" stroke-width="1"/>
+<text x="538" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--muted</text>
+<text x="538" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#5B6475</text>
+</g>
+<g id="Colour / Light / border">
+<rect x="64" y="326" width="142" height="70" rx="8" fill="#dde2ea" stroke="#dde2ea" stroke-width="1"/>
+<text x="64" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--border</text>
+<text x="64" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#DDE2EA</text>
+</g>
+<g id="Colour / Light / navy">
+<rect x="222" y="326" width="142" height="70" rx="8" fill="#14213d" stroke="#dde2ea" stroke-width="1"/>
+<text x="222" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--navy</text>
+<text x="222" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#14213D</text>
+</g>
+<g id="Colour / Light / accent">
+<rect x="380" y="326" width="142" height="70" rx="8" fill="#f2a65a" stroke="#dde2ea" stroke-width="1"/>
+<text x="380" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--accent</text>
+<text x="380" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#F2A65A</text>
+</g>
+<g id="Colour / Light / accentInk">
+<rect x="538" y="326" width="142" height="70" rx="8" fill="#9a4614" stroke="#dde2ea" stroke-width="1"/>
+<text x="538" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--accent-ink</text>
+<text x="538" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#9A4614</text>
+</g>
+<g id="Colour / Light / ok">
+<rect x="64" y="456" width="142" height="70" rx="8" fill="#1f7a3a" stroke="#dde2ea" stroke-width="1"/>
+<text x="64" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--ok</text>
+<text x="64" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#1F7A3A</text>
+</g>
+<g id="Colour / Light / okBg">
+<rect x="222" y="456" width="142" height="70" rx="8" fill="#e5f4ea" stroke="#dde2ea" stroke-width="1"/>
+<text x="222" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--ok-bg</text>
+<text x="222" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#E5F4EA</text>
+</g>
+<g id="Colour / Light / bad">
+<rect x="380" y="456" width="142" height="70" rx="8" fill="#b42318" stroke="#dde2ea" stroke-width="1"/>
+<text x="380" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--bad</text>
+<text x="380" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#B42318</text>
+</g>
+<g id="Colour / Light / badBg">
+<rect x="538" y="456" width="142" height="70" rx="8" fill="#fde8e6" stroke="#dde2ea" stroke-width="1"/>
+<text x="538" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--bad-bg</text>
+<text x="538" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#FDE8E6</text>
+</g>
+<g id="Colour / Light / warnBg">
+<rect x="64" y="586" width="142" height="70" rx="8" fill="#fff3e0" stroke="#dde2ea" stroke-width="1"/>
+<text x="64" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--warn-bg</text>
+<text x="64" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#FFF3E0</text>
+</g>
+<g id="Colour / Light / infoBg">
+<rect x="222" y="586" width="142" height="70" rx="8" fill="#e8eefb" stroke="#dde2ea" stroke-width="1"/>
+<text x="222" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--info-bg</text>
+<text x="222" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#E8EEFB</text>
+</g>
+<g id="Colour / Light / code">
+<rect x="380" y="586" width="142" height="70" rx="8" fill="#0f1626" stroke="#dde2ea" stroke-width="1"/>
+<text x="380" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--code</text>
+<text x="380" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#0F1626</text>
+</g>
+<g id="Colour / Light / codeText">
+<rect x="538" y="586" width="142" height="70" rx="8" fill="#d6deeb" stroke="#dde2ea" stroke-width="1"/>
+<text x="538" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--code-text</text>
+<text x="538" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#D6DEEB</text>
+</g>
+<text x="740" y="170" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="20" font-weight="700" fill="#1d2433">Colour — Dark</text>
+<g id="Colour / Dark / bg">
+<rect x="740" y="196" width="142" height="70" rx="8" fill="#0f131b" stroke="#dde2ea" stroke-width="1"/>
+<text x="740" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--bg</text>
+<text x="740" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#0F131B</text>
+</g>
+<g id="Colour / Dark / card">
+<rect x="898" y="196" width="142" height="70" rx="8" fill="#171c26" stroke="#dde2ea" stroke-width="1"/>
+<text x="898" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--card</text>
+<text x="898" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#171C26</text>
+</g>
+<g id="Colour / Dark / text">
+<rect x="1056" y="196" width="142" height="70" rx="8" fill="#e4e8ef" stroke="#dde2ea" stroke-width="1"/>
+<text x="1056" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--text</text>
+<text x="1056" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#E4E8EF</text>
+</g>
+<g id="Colour / Dark / muted">
+<rect x="1214" y="196" width="142" height="70" rx="8" fill="#98a2b3" stroke="#dde2ea" stroke-width="1"/>
+<text x="1214" y="288" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--muted</text>
+<text x="1214" y="306" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#98A2B3</text>
+</g>
+<g id="Colour / Dark / border">
+<rect x="740" y="326" width="142" height="70" rx="8" fill="#2a3242" stroke="#dde2ea" stroke-width="1"/>
+<text x="740" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--border</text>
+<text x="740" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#2A3242</text>
+</g>
+<g id="Colour / Dark / navy">
+<rect x="898" y="326" width="142" height="70" rx="8" fill="#c9d4ea" stroke="#dde2ea" stroke-width="1"/>
+<text x="898" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--navy</text>
+<text x="898" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#C9D4EA</text>
+</g>
+<g id="Colour / Dark / accent">
+<rect x="1056" y="326" width="142" height="70" rx="8" fill="#f2a65a" stroke="#dde2ea" stroke-width="1"/>
+<text x="1056" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--accent</text>
+<text x="1056" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#F2A65A</text>
+</g>
+<g id="Colour / Dark / accentInk">
+<rect x="1214" y="326" width="142" height="70" rx="8" fill="#f5b77a" stroke="#dde2ea" stroke-width="1"/>
+<text x="1214" y="418" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--accent-ink</text>
+<text x="1214" y="436" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#F5B77A</text>
+</g>
+<g id="Colour / Dark / ok">
+<rect x="740" y="456" width="142" height="70" rx="8" fill="#6fcf8c" stroke="#dde2ea" stroke-width="1"/>
+<text x="740" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--ok</text>
+<text x="740" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#6FCF8C</text>
+</g>
+<g id="Colour / Dark / okBg">
+<rect x="898" y="456" width="142" height="70" rx="8" fill="#16301f" stroke="#dde2ea" stroke-width="1"/>
+<text x="898" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--ok-bg</text>
+<text x="898" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#16301F</text>
+</g>
+<g id="Colour / Dark / bad">
+<rect x="1056" y="456" width="142" height="70" rx="8" fill="#f28b82" stroke="#dde2ea" stroke-width="1"/>
+<text x="1056" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--bad</text>
+<text x="1056" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#F28B82</text>
+</g>
+<g id="Colour / Dark / badBg">
+<rect x="1214" y="456" width="142" height="70" rx="8" fill="#3a1a18" stroke="#dde2ea" stroke-width="1"/>
+<text x="1214" y="548" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--bad-bg</text>
+<text x="1214" y="566" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#3A1A18</text>
+</g>
+<g id="Colour / Dark / warnBg">
+<rect x="740" y="586" width="142" height="70" rx="8" fill="#3a2a14" stroke="#dde2ea" stroke-width="1"/>
+<text x="740" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--warn-bg</text>
+<text x="740" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#3A2A14</text>
+</g>
+<g id="Colour / Dark / infoBg">
+<rect x="898" y="586" width="142" height="70" rx="8" fill="#1c2740" stroke="#dde2ea" stroke-width="1"/>
+<text x="898" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--info-bg</text>
+<text x="898" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#1C2740</text>
+</g>
+<g id="Colour / Dark / code">
+<rect x="1056" y="586" width="142" height="70" rx="8" fill="#0a0e15" stroke="#dde2ea" stroke-width="1"/>
+<text x="1056" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--code</text>
+<text x="1056" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#0A0E15</text>
+</g>
+<g id="Colour / Dark / codeText">
+<rect x="1214" y="586" width="142" height="70" rx="8" fill="#d6deeb" stroke="#dde2ea" stroke-width="1"/>
+<text x="1214" y="678" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">--code-text</text>
+<text x="1214" y="696" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#5b6475">#D6DEEB</text>
+</g>
+<text x="64" y="760" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="20" font-weight="700" fill="#1d2433">Type scale</text>
+<text x="64" y="804" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="700" fill="#1d2433">H1 / 22 Bold</text>
+<text x="360" y="804" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Inter 22 / 700</text>
+<text x="64" y="852" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="16" font-weight="700" fill="#1d2433">H2 / 16 Bold</text>
+<text x="360" y="852" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Inter 16 / 700</text>
+<text x="64" y="900" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="400" fill="#1d2433">Body / 15 Regular</text>
+<text x="360" y="900" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Inter 15 / 400 · line 1.5</text>
+<text x="64" y="948" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1d2433">Label / 14 Semibold</text>
+<text x="360" y="948" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Inter 14 / 600</text>
+<text x="64" y="996" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#1d2433">Small / 13 Regular</text>
+<text x="360" y="996" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Inter 13 / 400</text>
+<text x="64" y="1044" font-family="Consolas, 'JetBrains Mono', monospace" font-size="12" font-weight="400" fill="#1d2433">Code / 12 Mono</text>
+<text x="360" y="1044" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Consolas 12 · line 1.45</text>
+<text x="740" y="760" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="20" font-weight="700" fill="#1d2433">Radius &amp; spacing</text>
+<rect x="740" y="790" width="120" height="64" rx="6" fill="#e8eefb" stroke="#dde2ea" stroke-width="1"/>
+<text x="740" y="876" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">radius/sm  6</text>
+<text x="740" y="894" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">inputs, buttons, steps</text>
+<rect x="900" y="790" width="120" height="64" rx="8" fill="#e8eefb" stroke="#dde2ea" stroke-width="1"/>
+<text x="900" y="876" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">radius/md  8</text>
+<text x="900" y="894" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">fieldsets, tiers, run rows</text>
+<rect x="1060" y="790" width="120" height="64" rx="10" fill="#e8eefb" stroke="#dde2ea" stroke-width="1"/>
+<text x="1060" y="876" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">radius/lg  10</text>
+<text x="1060" y="894" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">cards</text>
+<rect x="1220" y="790" width="120" height="64" rx="32" fill="#e8eefb" stroke="#dde2ea" stroke-width="1"/>
+<text x="1220" y="876" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1d2433">radius/pill  999</text>
+<text x="1220" y="894" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">badges, pills</text>
+<rect x="740" y="940" width="4" height="4" rx="0" fill="#f2a65a"/>
+<text x="740" y="964" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">4px</text>
+<rect x="830" y="940" width="8" height="8" rx="0" fill="#f2a65a"/>
+<text x="830" y="968" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">8px</text>
+<rect x="920" y="940" width="12" height="12" rx="0" fill="#f2a65a"/>
+<text x="920" y="972" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">12px</text>
+<rect x="1010" y="940" width="16" height="16" rx="0" fill="#f2a65a"/>
+<text x="1010" y="976" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">16px</text>
+<rect x="1100" y="940" width="18" height="18" rx="0" fill="#f2a65a"/>
+<text x="1100" y="978" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">18px</text>
+<rect x="1190" y="940" width="20" height="20" rx="0" fill="#f2a65a"/>
+<text x="1190" y="980" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="400" fill="#5b6475">20px</text>
+<text x="740" y="1020" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="13" font-weight="400" fill="#5b6475">Layout: max-width 1280 · card padding 18 · grid 3fr / 2fr, gap 16 · stacks below 900px</text>
+</svg>
