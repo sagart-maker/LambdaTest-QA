@@ -146,23 +146,35 @@ function safeFile(id, rel) {
 
 // ---------- brief (intake.md) ----------
 
-const DEVICE_TIERS = {
-  core: 'Core phones: latest iPhone (Safari), latest Samsung Galaxy S and latest Google Pixel (Chrome), LambdaTest real devices, portrait.',
-  desktop: 'Core phones (latest iPhone Safari, latest Galaxy S and Pixel Chrome, real devices) plus desktop browsers: Chrome + Edge on Windows 11, Safari on macOS.',
-  tablet: 'Core phones (latest iPhone Safari, latest Galaxy S and Pixel Chrome, real devices) plus desktop (Chrome + Edge on Windows 11, Safari on macOS) plus the latest iPad.',
+// Device chips offered in the UI -> what the brief tells the agent. Exact models are resolved at run time.
+const DEVICE_OPTIONS = {
+  iphone: 'Latest iPhone, Safari (real device)',
+  galaxy: 'Latest Samsung Galaxy S, Chrome (real device)',
+  pixel: 'Latest Google Pixel, Chrome (real device)',
+  ipad: 'Latest iPad, Safari (real device)',
+  'win-chrome': 'Chrome on Windows 11 (desktop)',
+  'mac-safari': 'Safari on macOS (desktop)',
+  'win-edge': 'Edge on Windows 11 (desktop)',
   broad: [
-    'Broad mobile coverage (about 20 real devices). Resolve exact models from the LambdaTest device list at run time; never hardcode one you have not confirmed.',
-    '- iOS: latest iPhone, latest iPhone Pro Max, an iPhone SE / small screen, one iPhone on iOS N-1 and one on iOS N-2; latest iPad.',
-    '- Android: latest Galaxy S, a Galaxy A mid-range, latest Pixel, a Pixel on Android N-1/N-2, plus OnePlus, Xiaomi/Redmi, Motorola and Oppo/Vivo where available; one Android tablet.',
-    '- Cover small (<= 375px), standard and large (>= 428px) viewports and Android 12 to latest.',
-    '- Run the full selected suite on the 3 core phones (latest iPhone, Galaxy S, Pixel). Run smoke + responsive (+ UI if selected) on the rest.',
+    'Broad mobile set (about 20 real devices) on top of the above. Resolve exact models from the LambdaTest device list at run time; never hardcode one you have not confirmed.',
+    '  - iOS: latest iPhone Pro Max, an iPhone SE / small screen, one iPhone on iOS N-1 and one on iOS N-2.',
+    '  - Android: a Galaxy A mid-range, a Pixel on Android N-1/N-2, plus OnePlus, Xiaomi/Redmi, Motorola and Oppo/Vivo where available; one Android tablet.',
+    '  - Cover small (<= 375px), standard and large (>= 428px) viewports and Android 12 to latest.',
+    '  - Run the full selected suite on the primary phones. Run smoke + responsive (+ UI if selected) on the broad set.',
   ].join('\n'),
 };
+
+function deviceLines(f) {
+  const keys = Array.isArray(f.devices) && f.devices.length ? f.devices : ['iphone', 'galaxy', 'pixel'];
+  const lines = keys.filter((k) => DEVICE_OPTIONS[k]).map((k) => `- ${DEVICE_OPTIONS[k]}`);
+  if (f.customDevices) lines.push(`- Also: ${f.customDevices}`);
+  return lines.join('\n') + '\n- Portrait by default.';
+}
 
 function buildIntake(f, runFolder) {
   const types = (f.testTypes && f.testTypes.length) ? f.testTypes.join(', ') : 'Default: Smoke + UI + Functional + Responsive + Accessibility + SEO';
   const formats = (f.reportFormats && f.reportFormats.length) ? f.reportFormats.join(', ') : 'Markdown only';
-  const devices = f.deviceTier === 'custom' ? `Custom list:\n${f.customDevices || '(none given — use core phones)'}` : (DEVICE_TIERS[f.deviceTier] || DEVICE_TIERS.core);
+  const devices = deviceLines(f);
   const cred = credentialStatus();
   const lines = [
     `# QA brief — ${f.url}`,
@@ -234,9 +246,17 @@ function runAgent(id, phase) {
   const r = runs.get(id);
   const dir = runDir(id);
   const intake = path.join(dir, 'intake.md');
+  // The PLAN:/EXECUTE: line is the plugin's contract; the extra paragraph only asks for machine-readable
+  // side files the web UI renders (progress bar, Go/No-Go panel). They must carry real values only.
   const prompt = phase === 'plan'
     ? `PLAN: brief at ${intake}. Write test-cases and test-plan in that folder.`
-    : `EXECUTE: plan approved at ${path.join(dir, 'test-plan.md')}. Brief at ${intake}.`;
+    : [
+      `EXECUTE: plan approved at ${path.join(dir, 'test-plan.md')}. Brief at ${intake}.`,
+      '',
+      'This run is driven by a web UI that reads two extra JSON files in the run folder. Write them with real values only; never estimate or invent results.',
+      '1. progress.json — create it before the smoke gate and rewrite it after each test batch: {"total": <planned test executions>, "done": <finished>, "current": "<what is running now>", "devices": [{"name": "<resolved device/browser>", "status": "queued|running|done|blocked"}]}.',
+      '2. results.json — write it right after report.md: {"verdict": "Go"|"No-Go", "reason": "<one sentence>", "totals": {"total": n, "passed": n, "failed": n, "blocked": n, "flaky": n}, "byType": [{"type": "<test type>", "passed": n, "failed": n, "blocked": n, "status": "Pass"|"Fail"|"Blocked"}], "defects": [{"id": "BUG-###", "severity": "Critical|High|Medium|Low", "title": "...", "type": "<test type>", "device": "..."}]}. Defects most severe first.',
+    ].join('\n');
 
   const readOnly = ['Read', 'Glob', 'Grep', 'WebFetch', 'WebSearch', 'Skill', 'ToolSearch', 'TodoWrite', 'Write', 'Edit'];
   const execTools = ['Bash(node:*)', 'Bash(npm:*)', 'Bash(npx:*)', 'Bash(curl:*)', 'Bash(python:*)', 'Bash(python3:*)', 'Bash(py:*)', 'Bash(ls:*)', 'Bash(mkdir:*)', 'Bash(cat:*)', 'Bash(cd:*)'];
@@ -364,10 +384,74 @@ app.post('/api/runs', (req, res) => {
   res.json(state);
 });
 
+function readJson(id, name) {
+  try { return JSON.parse(fs.readFileSync(path.join(runDir(id), name), 'utf8')); } catch { return null; }
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; } else if (c === '"') q = false; else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(cell); cell = ''; }
+    else if (c === '\n') { row.push(cell.replace(/\r$/, '')); rows.push(row); row = []; cell = ''; }
+    else cell += c;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows.filter((r) => r.some((c) => c.trim()));
+}
+
+// Test cases for the plan table, from the agent's test-cases.csv (columns per the lt-test-cases skill).
+function readCases(id) {
+  let text;
+  try { text = fs.readFileSync(path.join(runDir(id), 'test-cases.csv'), 'utf8').replace(/^﻿/, ''); } catch { return null; }
+  const [head, ...body] = parseCsv(text);
+  if (!head) return [];
+  const find = (...names) => head.findIndex((h) => names.some((n) => h.trim().toLowerCase() === n));
+  const col = { id: find('tc id', 'id', 'tc'), title: find('title', 'test case', 'name'), type: find('type', 'test type'), priority: find('priority'), status: find('status') };
+  return body.map((r) => ({
+    id: r[col.id] || '', title: r[col.title] || '', type: r[col.type] || '', priority: r[col.priority] || '', status: col.status >= 0 ? r[col.status] || '' : '',
+  }));
+}
+
 app.get('/api/runs/:id', (req, res) => {
-  const r = runs.get(req.params.id);
+  const id = req.params.id;
+  const r = runs.get(id);
   if (!r) return res.status(404).json({ error: 'Run not found' });
-  res.json({ ...r.state, files: listFiles(req.params.id), running: !!r.proc });
+  const f = r.state.form || {};
+  const deviceKeys = Array.isArray(f.devices) && f.devices.length ? f.devices : ['iphone', 'galaxy', 'pixel'];
+  res.json({
+    ...r.state,
+    files: listFiles(id),
+    running: !!r.proc,
+    cases: readCases(id),
+    progress: readJson(id, 'progress.json'),
+    results: readJson(id, 'results.json'),
+    deviceLabels: deviceKeys.map((k) => DEVICE_OPTIONS[k] && DEVICE_OPTIONS[k].split('\n')[0].replace(/ on top of the above.*$/, '')).filter(Boolean),
+  });
+});
+
+// Save LambdaTest keys to ~/.lambdatest/.env (outside the repo) after checking them against the LambdaTest API.
+app.post('/api/credentials', async (req, res) => {
+  const username = String((req.body && req.body.username) || '').trim();
+  const accessKey = String((req.body && req.body.accessKey) || '').trim();
+  if (!username || !accessKey) return res.status(400).json({ error: 'Enter both the username and the access key.' });
+  let code = 0;
+  try {
+    const auth = Buffer.from(`${username}:${accessKey}`).toString('base64');
+    const resp = await fetch('https://api.lambdatest.com/automation/api/v1/builds?limit=1', { headers: { Authorization: `Basic ${auth}` } });
+    code = resp.status;
+  } catch {
+    return res.status(502).json({ error: 'Could not reach LambdaTest to check the keys. Check your connection.' });
+  }
+  if (code !== 200) return res.status(400).json({ error: `LambdaTest rejected these keys (HTTP ${code}).` });
+  fs.mkdirSync(LT_ENV_DIR, { recursive: true });
+  let keep = [];
+  try { keep = fs.readFileSync(LT_ENV_FILE, 'utf8').split(/\r?\n/).filter((l) => l.trim() && !/^\s*LT_(USERNAME|ACCESS_KEY)\s*=/.test(l)); } catch { /* new file */ }
+  fs.writeFileSync(LT_ENV_FILE, [...keep, `LT_USERNAME=${username}`, `LT_ACCESS_KEY=${accessKey}`, ''].join('\n'), { mode: 0o600 });
+  res.json({ ok: true, credentials: credentialStatus() });
 });
 
 app.get('/api/runs/:id/events', (req, res) => {
@@ -400,6 +484,7 @@ app.post('/api/runs/:id/replan', (req, res) => {
   if (!r) return res.status(404).json({ error: 'Run not found' });
   if (!guardIdle(r, res)) return;
   const note = String((req.body && req.body.feedback) || '').trim();
+  r.state.planVersion = (r.state.planVersion || 1) + 1;
   if (note) {
     fs.appendFileSync(path.join(runDir(req.params.id), 'intake.md'),
       `\n## Plan adjustment (${new Date().toISOString()})\n${note}\n`);

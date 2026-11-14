@@ -4,150 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LambdaTest QA Agent</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <a href="#/" class="brand"><span class="logo">QA</span> LambdaTest QA Agent</a>
-    <div id="envStatus" class="env"></div>
-  </header>
-
-  <main id="app"></main>
-
-  <template id="tpl-home">
-    <section class="grid">
-      <div class="card">
-        <h1>New test run</h1>
-        <p class="muted">Enter a website. The agent writes test cases and a test plan, waits for your approval, runs the tests on LambdaTest real devices and writes the report.</p>
-        <form id="runForm">
-          <fieldset>
-            <legend>1. Website</legend>
-            <label>Website URL <input name="url" type="url" required placeholder="https://staging.example.com"></label>
-            <div class="row">
-              <label>Environment
-                <select name="environment">
-                  <option value="staging">Staging / UAT</option>
-                  <option value="production">Production (read-only checks)</option>
-                  <option value="localhost">Localhost / private (needs tunnel)</option>
-                </select>
-              </label>
-              <label>Pages
-                <select name="pagesMode">
-                  <option value="crawl">Crawl from the homepage</option>
-                  <option value="list">I'll list the URLs</option>
-                </select>
-              </label>
-            </div>
-            <label class="pages-list hidden">Page URLs (one per line) <textarea name="pages" rows="3"></textarea></label>
-            <label>Critical (P0) flows <input name="p0Flows" placeholder="Home → Search → Product → Cart → Checkout"></label>
-            <label>Requirements doc (optional) <textarea name="requirements" rows="2" placeholder="Paste acceptance criteria, or a file path / link to the BRD/PRD"></textarea></label>
-          </fieldset>
-
-          <fieldset>
-            <legend>2. Test types</legend>
-            <div class="checks" id="testTypes">
-              <label><input type="checkbox" value="Smoke" checked> Smoke</label>
-              <label><input type="checkbox" value="Functional" checked> Functional</label>
-              <label><input type="checkbox" value="UI" checked> UI (design vs live)</label>
-              <label><input type="checkbox" value="Responsive / cross-browser" checked> Responsive / cross-browser</label>
-              <label><input type="checkbox" value="Accessibility (WCAG 2.2 AA)" checked> Accessibility</label>
-              <label><input type="checkbox" value="SEO" checked> SEO</label>
-              <label><input type="checkbox" value="Performance (Lighthouse, Core Web Vitals)"> Performance</label>
-              <label><input type="checkbox" value="Sanity"> Sanity</label>
-              <label><input type="checkbox" value="Regression"> Regression</label>
-            </div>
-            <label>Design reference for UI testing (optional) <input name="design" placeholder="Figma link or folder of PNG mockups"></label>
-          </fieldset>
-
-          <fieldset>
-            <legend>3. Devices</legend>
-            <div class="tiers" id="deviceTier">
-              <label class="tier"><input type="radio" name="deviceTier" value="core" checked><b>Core phones</b><span>Latest iPhone, Galaxy S, Pixel</span></label>
-              <label class="tier"><input type="radio" name="deviceTier" value="broad"><b>Broad mobile</b><span>~20 real phones &amp; tablets across OS versions, brands, sizes</span></label>
-              <label class="tier"><input type="radio" name="deviceTier" value="desktop"><b>Phones + desktop</b><span>Adds Chrome, Edge, Safari desktop</span></label>
-              <label class="tier"><input type="radio" name="deviceTier" value="tablet"><b>Phones + desktop + iPad</b><span>Adds the latest iPad</span></label>
-              <label class="tier"><input type="radio" name="deviceTier" value="custom"><b>Custom list</b><span>Name the devices yourself</span></label>
-            </div>
-            <label class="custom-devices hidden">Devices (one per line) <textarea name="customDevices" rows="3" placeholder="iPhone 15, iOS 17&#10;Galaxy A54, Android 14"></textarea></label>
-            <label class="inline"><input type="checkbox" name="realOnly" checked> Real devices only (no emulators)</label>
-          </fieldset>
-
-          <details>
-            <summary>4. More options</summary>
-            <label>Test accounts &amp; data <textarea name="testData" rows="2" placeholder="Test login, coupon codes, search terms. Avoid real passwords — use test accounts."></textarea></label>
-            <label>Thresholds (leave blank for defaults) <textarea name="thresholds" rows="2" placeholder="LCP < 2.5s, CLS < 0.1, INP < 200ms, Lighthouse ≥ 80, WCAG 2.2 AA…"></textarea></label>
-            <div class="row">
-              <label>Parallel sessions <input name="parallel" type="number" min="1" max="50" value="5"></label>
-              <label>Exclusions <input name="exclusions" placeholder="e.g. skip /checkout/pay"></label>
-            </div>
-            <label>Notes for the agent <textarea name="notes" rows="2"></textarea></label>
-          </details>
-
-          <fieldset>
-            <legend>5. Report formats</legend>
-            <div class="checks" id="reportFormats">
-              <label><input type="checkbox" value="Excel (.xlsx)" checked> Excel</label>
-              <label><input type="checkbox" value="PDF (.pdf)" checked> PDF</label>
-              <label><input type="checkbox" value="Word (.docx)"> Word</label>
-            </div>
-            <p class="muted small">report.md is always written.</p>
-          </fieldset>
-
-          <label class="inline consent"><input type="checkbox" name="authorized" required> I own this site or am authorized to test it.</label>
-          <div id="formError" class="error hidden"></div>
-          <button type="submit" class="primary">Create test plan</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <h2>Runs</h2>
-        <div id="runList" class="runlist"><p class="muted">No runs yet.</p></div>
-      </div>
-    </section>
-  </template>
-
-  <template id="tpl-run">
-    <section>
-      <a href="#/" class="back">← All runs</a>
-      <div class="card">
-        <div class="runhead">
+  <div class="page">
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a href="#/" class="brand">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
           <div>
-            <h1 id="runUrl"></h1>
-            <div class="muted small" id="runId"></div>
+            <div class="brand-name">LambdaTest QA Agent</div>
+            <div class="brand-sub" id="envLine">Checking setup…</div>
           </div>
-          <span id="runBadge" class="badge"></span>
-        </div>
-        <ol class="steps" id="steps">
-          <li data-step="plan">Plan</li>
-          <li data-step="approve">Approve</li>
-          <li data-step="execute">Run on LambdaTest</li>
-          <li data-step="report">Report</li>
-        </ol>
-        <p id="runMessage"></p>
-        <div class="actions" id="actions"></div>
-        <div id="adjustBox" class="hidden">
-          <label>What should change in the plan? <textarea id="adjustText" rows="3" placeholder="e.g. drop SEO, add the login flow as P0, test on Android 12 too"></textarea></label>
-          <button id="adjustSend">Re-plan with these changes</button>
-        </div>
+        </a>
+        <div class="site-under-test">Site under test: <b id="siteUnderTest">—</b></div>
       </div>
+    </header>
 
-      <div class="grid run-grid">
-        <div class="card">
-          <div class="tabs" id="docTabs"></div>
-          <div id="docView" class="doc"><p class="muted">Documents appear here as the agent writes them.</p></div>
-        </div>
-        <div class="card">
-          <h2>Files</h2>
-          <ul id="fileList" class="files"></ul>
-          <h2>Live agent log</h2>
-          <pre id="log" class="log"></pre>
-        </div>
-      </div>
-    </section>
-  </template>
+    <nav aria-label="Progress" class="stepbar">
+      <ol class="wrap steps" id="steps"></ol>
+    </nav>
 
+    <main class="wrap main" id="app"></main>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>
