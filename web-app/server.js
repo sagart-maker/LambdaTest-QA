@@ -148,15 +148,15 @@ function safeFile(id, rel) {
 
 // Device chips offered in the UI -> what the brief tells the agent. Exact models are resolved at run time.
 const DEVICE_OPTIONS = {
-  iphone: 'Latest iPhone, Safari (real device)',
-  galaxy: 'Latest Samsung Galaxy S, Chrome (real device)',
-  pixel: 'Latest Google Pixel, Chrome (real device)',
-  ipad: 'Latest iPad, Safari (real device)',
+  iphone: 'Latest iPhone, Safari',
+  galaxy: 'Latest Samsung Galaxy S, Chrome',
+  pixel: 'Latest Google Pixel, Chrome',
+  ipad: 'Latest iPad, Safari',
   'win-chrome': 'Chrome on Windows 11 (desktop)',
   'mac-safari': 'Safari on macOS (desktop)',
   'win-edge': 'Edge on Windows 11 (desktop)',
   broad: [
-    'Broad mobile set (about 20 real devices) on top of the above. Resolve exact models from the LambdaTest device list at run time; never hardcode one you have not confirmed.',
+    'Broad mobile set (about 20 devices) on top of the above. Resolve exact models from the LambdaTest device list at run time; never hardcode one you have not confirmed.',
     '  - iOS: latest iPhone Pro Max, an iPhone SE / small screen, one iPhone on iOS N-1 and one on iOS N-2.',
     '  - Android: a Galaxy A mid-range, a Pixel on Android N-1/N-2, plus OnePlus, Xiaomi/Redmi, Motorola and Oppo/Vivo where available; one Android tablet.',
     '  - Cover small (<= 375px), standard and large (>= 428px) viewports and Android 12 to latest.',
@@ -197,12 +197,17 @@ function buildIntake(f, runFolder) {
     '## Test types',
     types,
     '',
+    '**Scope lock:** run ONLY the test types listed above. Do not add, expand or substitute any other test type, even if a default would normally include it.',
+    '',
     '## Design reference (UI testing)',
     f.design ? f.design : 'None — heuristic UI checks only, labelled "no design reference".',
     '',
     '## Devices',
     devices,
-    `- Real devices only: ${f.realOnly ? 'yes' : 'no, emulators/simulators OK for broad UI coverage'}`,
+    `- Device pool: ${f.realOnly
+      ? 'real devices only (`isRealMobile: true`) — needs the Real Device Automation add-on; if the plan rejects a real-device session, mark those tests **Blocked**, do not fall back to an emulator or desktop browser.'
+      : 'LambdaTest emulators/simulators by default (`isRealMobile: false`); use a real device only if one is explicitly listed above.'}`,
+    '- **Scope lock:** run the suite on exactly the devices/browsers listed above and nothing else. Each resolved model must be one that actually exists on LambdaTest (resolve from the device list / capabilities generator at run time). Do NOT add, propose-and-run, or substitute any device or browser that is not in this list. If a listed device cannot run on the current plan, mark its tests **Blocked** and say why — never silently swap in a different device, engine or desktop browser to fill the gap.',
     '',
     '## Credentials',
     `- LambdaTest credentials: ${cred.present ? `present (location: ${cred.location})` : 'not found — plan only (mode C) unless they are added before execution'}. Never print or write the values.`,

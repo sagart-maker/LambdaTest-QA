@@ -1,6 +1,6 @@
 ---
 name: lt-functional-testing
-description: "Functional testing playbook for websites on LambdaTest: forms, validation, navigation, search, cart, auth, business rules and UI correctness, on real iOS/Android devices and desktop browsers. Used by the lambdatest-qa agent."
+description: "Functional testing playbook for websites on LambdaTest: forms, validation, navigation, search, cart, auth, business rules and UI correctness, on iOS/Android emulators, simulators or real devices and desktop browsers. Used by the lambdatest-qa agent."
 ---
 
 # Functional testing
@@ -18,8 +18,8 @@ Does every feature behave as the BRD (or common sense) says, and does the UI sho
 - **UI behaviour** (visual match to the design lives in lt-ui-testing): correct labels/copy, images load, icons/buttons states (hover/disabled/loading), modals/toasts appear and dismiss, no overlapping elements, cookie banner works and doesn't block content.
 
 ## LambdaTest
-- **Mode A:** KaneAI tests written as step lists (format in the `lt-lambdatest-setup` skill); real devices for mobile.
-- **Mode B:** Playwright (desktop, Android Chrome) / Selenium-Appium (iOS Safari real devices) from the templates; data-driven where inputs vary; screenshots at each assertion; mark sessions via API.
+- **Mode A:** KaneAI tests written as step lists (format in the `lt-lambdatest-setup` skill); emulators/simulators for mobile by default (real devices if the brief requires them).
+- **Mode B:** Playwright (desktop, Android Chrome) / Selenium-Appium (iOS Safari — emulator/simulator by default, `isRealMobile: true` only when required) from the templates; data-driven where inputs vary; screenshots at each assertion; mark sessions via API.
 - Geo-specific content: `geoLocation` capability.
 
 ## TC patterns

@@ -48,13 +48,15 @@ Pick the mode and state it in your output: **A: MCP** (tools loaded) · **B: API
 
 ## 1 — Read the brief
 
-Read `intake.md`. Defaults for anything missing:
+Read `intake.md`. **The brief is authoritative on scope: run exactly the test types and exactly the devices/browsers it lists — nothing more.** The defaults below apply *only* to fields the brief leaves blank; when the brief names test types or devices, those lists are the complete scope. Never widen the matrix, and never add, propose-and-run or substitute a test type, device, engine or desktop browser the brief did not select. You may note additional coverage you'd recommend under open questions / follow-ups, but do not execute it.
+
+Defaults for anything missing:
 - **Environment:** production (read-only and non-destructive only).
 - **Requirements:** none, so the plan is heuristic-derived (labelled "no BRD"). If a doc or link is given, extract `REQ-###` rows (flow, rule, acceptance criterion, priority) and trace every TC to one.
 - **Pages:** crawl the homepage (sitemap or internal links, depth 2). Mark inferred P0 flows as *proposed*.
 - **Test types:** Smoke + UI + Functional + Responsive + Accessibility + SEO.
 - **Design (UI testing):** use the frames/images in `<run folder>/design/` and `design/mapping.md`. If there's no design, run heuristic UI checks only and label them "no design reference". If a Figma link is in the brief but no exported frames are, list it as an open question. Don't guess what the design looks like.
-- **Devices:** latest iPhone (Safari), latest Samsung Galaxy S and latest Google Pixel (Chrome) on LambdaTest real devices, in portrait. Resolve exact models from the MCP tools or the LambdaTest devices list at run time. Never hardcode a model you haven't confirmed exists.
+- **Devices:** latest iPhone (Safari) simulator, latest Samsung Galaxy S and latest Google Pixel (Chrome) emulators on LambdaTest (`isRealMobile: false`), in portrait — used **only when the brief names no devices**. Prefer the first available/existing emulator or simulator for each model, confirmed against the LambdaTest device list. Use **real devices** (`isRealMobile: true`) only when the brief explicitly asks for them; real-device automation needs the Real Device entitlement on the account and is marked **Blocked** if the plan rejects it. Resolve exact models from the MCP tools or the LambdaTest devices list at run time. Never hardcode a model you haven't confirmed exists.
 - **Thresholds:** LCP < 2.5s, CLS < 0.1, INP < 200ms (TBT < 200ms in lab), Lighthouse Performance ≥ 80, WCAG 2.2 AA with no critical issues, visual diff ≤ 0.5%, 0 broken internal links, unit coverage ≥ 80% on changed files. Blockers: any P0 failure or any Critical/High defect.
 - **Run settings:** 5 parallel sessions, Fast 4G throttling on mobile. No captcha bypass, no payment submission, no real emails on production.
 - **Report:** `report.md`, plus each format chosen in the brief (Excel `.xlsx`, PDF `.pdf`, Word `.docx`). If no format is in the brief, write `report.md` only and list "report format" as an open question. Defects are listed in the report.
@@ -71,11 +73,12 @@ Read `intake.md`. Defaults for anything missing:
 ## 3 — Execute (EXECUTE mode)
 
 - Re-read the plan and test cases, and load the relevant type skills. Track every TC.
+- **Scope lock:** the executed matrix is exactly *selected test types × selected devices/browsers* from the brief. Do not run anything outside it. If a selected device is unavailable on the plan, mark its tests **Blocked** and move on — do not fill the gap with a device, engine or desktop browser the user didn't select.
 - **Smoke first** on the primary device. If smoke fails, stop the rest, write the report and return. Don't burn sessions on the full matrix.
-- **Mode A:** KaneAI for natural-language functional/UI tests, Real Device Cloud for mobile, SmartUI for visual, the LambdaTest accessibility tools, HyperExecute for big parallel suites.
+- **Mode A:** KaneAI for natural-language functional/UI tests, LambdaTest emulators/simulators for mobile by default (Real Device Cloud only when the brief requires real hardware), SmartUI for visual, the LambdaTest accessibility tools, HyperExecute for big parallel suites.
 - **Mode B:** load `lt-lambdatest-setup`, generate scripts from its templates into the run folder, install dependencies there, and run them on the grid up to the parallel limit. Pull status, video, screenshots, console and network logs from the REST API, and mark each session passed or failed through the API.
 - Each type skill defines its own checks, evidence and pass/fail rules. Follow it.
-- **Blocked** = couldn't run (auth, captcha, WAF, device unavailable). It's never Passed or Failed. Retry a failure once; if it then passes, it's **Flaky**.
+- **Blocked** = couldn't run (auth, captcha, WAF, device/plan unavailable). It's never Passed or Failed, and is never replaced by running a different, unselected device or browser. Retry a failure once; if it then passes, it's **Flaky**.
 
 ## 4 — Report
 

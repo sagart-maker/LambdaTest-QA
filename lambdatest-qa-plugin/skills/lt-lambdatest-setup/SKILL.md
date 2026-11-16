@@ -1,23 +1,27 @@
 ---
 name: lt-lambdatest-setup
-description: "LambdaTest / TestMu AI script templates and setup: Playwright CDP and Selenium capabilities, real iOS/Android devices from Node, credentials loading, tunnel, accessibility/performance flags, SmartUI, REST API for results, KaneAI step-list format, SEO quick checks. Used by the lambdatest-qa agent before generating or running scripts."
+description: "LambdaTest / TestMu AI script templates and setup: Playwright CDP and Selenium capabilities, iOS/Android emulators & simulators (default) and real devices from Node, credentials loading, tunnel, accessibility/performance flags, SmartUI, REST API for results, KaneAI step-list format, SEO quick checks. Used by the lambdatest-qa agent before generating or running scripts."
 ---
 
 # LambdaTest script templates
 
 Capability names change over time. Check them against the LambdaTest Capabilities Generator (https://www.lambdatest.com/capabilities-generator/) before running. Credentials always come from `LT_USERNAME` / `LT_ACCESS_KEY` env vars, or from `~/.lambdatest/.env` loaded at run time (`node --env-file=%USERPROFILE%\.lambdatest\.env tests/x.js`). Never write them into scripts, plans or reports.
 
-## Real devices from Node (selenium-webdriver): iOS Safari / Android Chrome
+## Mobile from Node (selenium-webdriver): iOS Safari / Android Chrome — emulator/simulator by default
 ```js
 // npm i selenium-webdriver   — run: node --env-file=<path to .env> tests/mobile.js
 const { Builder } = require('selenium-webdriver');
-async function ltMobile({ platformName, deviceName, platformVersion, browserName, name }) {
+// isRealMobile defaults to false → routes to a LambdaTest emulator/simulator (the plan default).
+// Pass isRealMobile: true only when the brief asks for real hardware AND the account has the
+// Real Device Automation entitlement; otherwise the session is rejected and the test is Blocked.
+async function ltMobile({ platformName, deviceName, platformVersion, browserName, name, isRealMobile = false }) {
   const caps = {
     browserName,                         // 'Safari' (iOS) | 'Chrome' (Android)
     'LT:Options': {
       username: process.env.LT_USERNAME, accessKey: process.env.LT_ACCESS_KEY,
       platformName, deviceName, platformVersion,   // resolve from the LT device list at run time
-      isRealMobile: true, build: process.env.LT_BUILD || 'Website QA', name,
+      isRealMobile: isRealMobile === true,         // false = emulator/simulator (default); true = real device
+      build: process.env.LT_BUILD || 'Website QA', name,
       network: true, console: true, video: true, w3c: true,
       tunnel: process.env.LT_TUNNEL === 'true',
     },
@@ -58,7 +62,9 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-def lt_driver(real_mobile=None, browser="Chrome", platform="Windows 11", name="test"):
+# mobile=e.g. {"platformName":"ios","deviceName":"iPhone 16","platformVersion":"18"}
+# real=False (default) → emulator/simulator; real=True → real device (needs the Real Device entitlement).
+def lt_driver(mobile=None, real=False, browser="Chrome", platform="Windows 11", name="test"):
     opts = Options()
     lt = {
         "username": os.environ["LT_USERNAME"],
@@ -68,17 +74,18 @@ def lt_driver(real_mobile=None, browser="Chrome", platform="Windows 11", name="t
         "network": True, "console": True, "video": True,
         "tunnel": os.getenv("LT_TUNNEL") == "true",
     }
-    if real_mobile:   # e.g. {"platformName":"ios","deviceName":"iPhone 16","platformVersion":"18"}
-        lt.update(real_mobile); lt["isRealMobile"] = True
-    else:
-        opts.browser_version = "latest"; lt["platformName"] = platform
-        lt["resolution"] = "1920x1080"
+    if mobile:
+        lt.update(mobile); lt["isRealMobile"] = bool(real)   # False (default) = emulator/simulator
+        opts.set_capability("LT:Options", lt)
+        return webdriver.Remote(command_executor="https://mobile-hub.lambdatest.com/wd/hub", options=opts)
+    opts.browser_version = "latest"; lt["platformName"] = platform
+    lt["resolution"] = "1920x1080"
     opts.set_capability("LT:Options", lt)
     return webdriver.Remote(command_executor="https://hub.lambdatest.com/wd/hub", options=opts)
 
 # mark status: driver.execute_script("lambda-status=passed")  # or failed
 ```
-Some accounts and endpoints route real devices through `https://mobile-hub.lambdatest.com/wd/hub`. Use whichever the capabilities generator shows for your account.
+Both emulator/simulator and real-device (Appium) sessions route through `https://mobile-hub.lambdatest.com/wd/hub`; desktop browser sessions use `https://hub.lambdatest.com/wd/hub`. Use whichever the capabilities generator shows for your account. Emulators/simulators are the default pool (`isRealMobile: false`) and don't need the Real Device Automation entitlement; real devices do, and are marked **Blocked** if the plan rejects them.
 
 ## Accessibility and performance flags (verify availability on your plan)
 - Accessibility scan: `"accessibility": true`, `"accessibility.wcagVersion": "wcag22aa"` in LT:Options. Fallback: inject axe-core (`@axe-core/playwright`) and save the JSON.

@@ -1,6 +1,6 @@
 ---
 name: lt-ui-testing
-description: "UI testing playbook for websites on LambdaTest: compares the live site against the design (Figma frames or design images/mockups) for layout, spacing, typography, colours, components and states, on real iOS/Android devices and desktop browsers. Falls back to heuristic UI checks when no design is provided. Used by the lambdatest-qa agent."
+description: "UI testing playbook for websites on LambdaTest: compares the live site against the design (Figma frames or design images/mockups) for layout, spacing, typography, colours, components and states, on iOS/Android emulators, simulators or real devices and desktop browsers. Falls back to heuristic UI checks when no design is provided. Used by the lambdatest-qa agent."
 ---
 
 # UI testing (design vs implementation)
@@ -13,7 +13,7 @@ description: "UI testing playbook for websites on LambdaTest: compares the live 
 - **Frame → page mapping** in `design/mapping.md`: `design file | page URL | viewport width | device | state` (e.g. `home-mobile.png | / | 390 | iPhone | default`). If the mapping is missing, infer it from frame names and widths (≤ 430 = mobile, 768–1024 = tablet, ≥ 1280 = desktop), and list the guesses as assumptions.
 
 ## Comparison method (per mapped frame)
-1. **Capture** the live page on LambdaTest at the frame's viewport: a real device of matching width for mobile, desktop browser at the matching resolution otherwise. Full-page screenshot saved as `evidence/ui/<page>-<device>.png`. Disable animations, wait for fonts and images to load, dismiss the cookie banner only if the design doesn't show it.
+1. **Capture** the live page on LambdaTest at the frame's viewport: a mobile emulator/simulator of matching width for mobile (real device only if the brief requires it), desktop browser at the matching resolution otherwise. Full-page screenshot saved as `evidence/ui/<page>-<device>.png`. Disable animations, wait for fonts and images to load, dismiss the cookie banner only if the design doesn't show it.
 2. **Visual comparison:** view the design and the screenshot side by side (Read both images). Note every difference by region: header, hero, cards, forms, footer.
 3. **Pixel diff (guide only):**
    - **SmartUI:** if Figma comparison is available on the account, upload the Figma frames as the baseline and compare (`PROJECT_TOKEN` comes from env only).
@@ -33,7 +33,7 @@ Consistent fonts and colour palette across pages · consistent button styles · 
 
 ## LambdaTest
 - **Mode A:** Real Device Cloud and KaneAI for screenshots and state interactions. SmartUI for comparisons.
-- **Mode B:** Playwright (desktop, Android Chrome) or selenium-webdriver (iOS Safari real device) from the templates. Capture screenshots and computed styles in the same session, and mark sessions passed or failed via the API.
+- **Mode B:** Playwright (desktop, Android Chrome) or selenium-webdriver (iOS Safari — emulator/simulator by default, real device only when required) from the templates. Capture screenshots and computed styles in the same session, and mark sessions passed or failed via the API.
 
 ## TC patterns
 `TC-UI-###`: "Homepage hero matches Figma frame 'Home / Mobile' on iPhone", "Primary button uses brand colour #0A5FFF with 8px radius", "Product card typography matches design tokens", "Form error state matches design".

@@ -51,7 +51,7 @@ Default if nothing is chosen: Smoke + UI + Functional + Responsive + Accessibili
   Then confirm the **frame → page mapping** (which design goes with which URL, at which viewport/device). Propose it from the frame names and widths, and let the user correct it. Save it to `design/mapping.md`.
 
 - **Devices.** Options: "Latest iOS + Android phones (Recommended)" / "Phones + desktop browsers" / "Phones + desktop + tablet" / "Custom list".
-  Default = latest iPhone (Safari), latest Samsung Galaxy S and latest Google Pixel (Chrome) on LambdaTest real devices. Desktop adds Chrome + Edge on Windows 11 and Safari on macOS. Tablet adds the latest iPad. The agent resolves exact model names at run time. Also ask: real devices only, or emulators OK for broad UI coverage?
+  Default = latest iPhone (Safari) simulator, latest Samsung Galaxy S and latest Google Pixel (Chrome) emulators on LambdaTest (`isRealMobile: false`). Desktop adds Chrome + Edge on Windows 11 and Safari on macOS. Tablet adds the latest iPad. The agent resolves exact model names at run time. Also ask: emulators/simulators (default — widest plan coverage, no Real Device entitlement needed) or real devices (`isRealMobile: true`, needs the Real Device Automation add-on; runs are Blocked if the plan lacks it)?
 
 ### Round 3 — LambdaTest credentials and run details
 4. **LambdaTest credentials** (skip if already found in step 0). Options:

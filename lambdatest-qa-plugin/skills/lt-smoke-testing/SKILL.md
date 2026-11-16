@@ -9,7 +9,7 @@ description: "Smoke testing playbook for websites on LambdaTest: a fast build-ve
 "Is this build stable enough to test?" A shallow, wide, fast check of P0 paths. It runs **first**; if it fails, stop and report — don't spend sessions on the full matrix.
 
 ## Devices
-Primary mobile (latest iPhone, Safari, real device) + primary Android (latest Galaxy S or Pixel, Chrome). Add desktop Chrome on Windows 11 if desktop is in scope. Time box: ≤ 15 minutes total.
+Primary mobile (latest iPhone, Safari, emulator/simulator by default) + primary Android (latest Galaxy S or Pixel, Chrome). Add desktop Chrome on Windows 11 if desktop is in scope. Time box: ≤ 15 minutes total.
 
 ## Checks (pick those that exist on the site; 8–15 TCs)
 1. Homepage returns 200 and renders the main content (logo, nav, hero/primary CTA visible).
